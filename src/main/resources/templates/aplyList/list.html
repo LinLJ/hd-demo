@@ -1,0 +1,20 @@
+<ul>
+    <li th:each="apply : ${applyList}">
+        <a th:inst_id="${apply.instId}" onclick="clickOneProcess(this.getAttribute('inst_id'))" target="_blank">
+            <span th:text="${apply.title}"></span>
+        </a>
+    </li>
+</ul>
+
+<style type="text/css">
+    ul li{
+        margin-bottom:15px;
+    }
+</style>
+
+<script type="text/javascript" th:inline="none">
+    function clickOneProcess(inistId) {
+        var userName = $("#currentUserName").text();
+        window.location.href="/check/showApplication?inistId="+inistId+"&userName="+userName;
+    }
+</script>

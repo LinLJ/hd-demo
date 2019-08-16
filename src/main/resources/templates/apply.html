@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/common/js/jquery-2.1.4.min.js}"></script>
+    <script th:src="@{/common/js/jquery.lazyload.min.js}"></script>
+    <script th:src="@{/common/js/bootstrap.min.js}"></script>
+    <script th:src="@{/common/js/jquery.ias.js}"></script>
+    <script th:src="@{/common/js/apply.js}"></script>
+</head>
+<body>
+    <h3>请假条申请</h3>
+
+    <p>申请人:</p><p id="userName" th:text="${userName}"></p><br />
+    <p>原因</p><input id="reason" type="text"/><br />
+    <p>提交至</p><input id="checkName" type="text"/><br />
+    <br />
+
+    <input type="button" onclick="clickApply()" value="提交"/>
+
+    <div id="jiazai" style="display:none;position:absolute;left:45%;top:45%">
+        <p>提交中.....</p>
+    </div>
+</body>
+</html>

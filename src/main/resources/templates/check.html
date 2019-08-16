@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/common/js/jquery-2.1.4.min.js}"></script>
+    <script th:src="@{/common/js/jquery.lazyload.min.js}"></script>
+    <script th:src="@{/common/js/bootstrap.min.js}"></script>
+    <script th:src="@{/common/js/jquery.ias.js}"></script>
+    <script th:src="@{/common/js/check.js}"></script>
+</head>
+<body>
+<p>当前用户：</p>
+<p id="currentUser" th:text="${userName}"></p>
+<p id="instId" th:text="${instId}" style="display:none"></p>
+<hr />
+<span>申请原因：</span>
+<span th:text="${reason}">
+
+</span>
+<hr />
+<p>历史流程</p> <br />
+<div class="lanmu" th:each="history : ${historyes}"><br />
+    <span th:text="${history.operator}"></span>
+    <span th:text="${history.stepName}"></span>
+    <span th:text="${history.actionName}"></span>
+
+    <span >时间：</span>
+    <span th:text="${history.finishDate}"></span>
+</div>
+<hr />
+<p>当前流程</p>
+<span th:text="${current.operator}"></span>
+<span th:text="${current.stepName}"></span>
+<span th:text="${current.status}"></span>
+<hr />
+<div th:if="${currentCheker}">
+    <div th:if="${haveNextCheck}">
+        <p>提交至：</p><input id="nextCheckName" type="text"/>
+    </div>
+    <button  onclick="clickCheck()">审批</button>
+</div>
+
+
+<div id="jiazai" style="display:none;position:absolute;left:45%;top:45%">
+    <p>提交中.....</p>
+</div>
+
+<style type="text/css">
+.lanmu p{
+    /*float: left;*/
+}
+
+
+</style>
+
+</body>
+</html>

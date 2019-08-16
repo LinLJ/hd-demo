@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        #list-div ul{list-style:none}
+        #list-ul li{float:left;width:100px}
+    </style>
+    <script th:src="@{/common/js/jquery-2.1.4.min.js}"></script>
+    <script th:src="@{/common/js/jquery.lazyload.min.js}"></script>
+    <script th:src="@{/common/js/bootstrap.min.js}"></script>
+    <script th:src="@{/common/js/jquery.ias.js}"></script>
+    <script th:src="@{/common/js/applyList.js}"></script>
+</head>
+<body>
+<p>当前用户：</p>
+<p id="currentUserName" th:text="${userName}"></p>
+
+<div id="jiazai" style="display:none;position:absolute;left:45%;top:45%">
+    <p>加载中.....</p>
+</div>
+
+<div id="list-div" style="width:70%;float:left">
+    <ul id="list-ul">
+        <li onclick="apply('apply')"><a>申请列表</a></li>
+        <li onclick="apply('check')"><a>审批列表</a></li>
+    </ul>
+    <br /><br />
+    <br />
+    <br /><br /><br />
+
+    <div id="applyList"></div>
+</div>
+<div style="width:30%;float:left">
+    <button onclick="startApply()">申请请假条</button>
+</div>
+
+</body>
+</html>
