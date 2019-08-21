@@ -1,6 +1,6 @@
 <ul>
     <li th:each="apply : ${applyList}">
-        <a th:inst_id="${apply.flowInstanceId}" onclick="clickOneProcess(this.getAttribute('inst_id'))" target="_blank">
+        <a th:inst_id="${apply.flowInstanceId}" th:bean_id="${apply.beanId}" onclick="clickOneProcess(this.getAttribute('inst_id'),this.getAttribute('bean_id'))" target="_blank">
             <span th:text="${apply.title}"></span>
         </a>
     </li>
@@ -15,10 +15,9 @@
 </style>
 
 <script type="text/javascript" th:inline="none">
-    function clickOneProcess(instId) {
-        debugger
+    function clickOneProcess(instId,beanId) {
         console.info(instId)
         var userName = $("#currentUserName").text();
-        window.location.href="/check/showApplication?instId="+instId+"&userName="+userName;
+        window.location.href="/check/showApplication?instId="+instId+"&beanId="+beanId+"&userName="+userName;
     }
 </script>

@@ -19,6 +19,16 @@ public class FlowProcess implements Serializable {
 
     private List<Map> participantInfos;
 
+    private List<Map> opinions;
+
+    public List<Map> getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(List<Map> opinions) {
+        this.opinions = opinions;
+    }
+
     public String getActionId() {
         return actionId;
     }

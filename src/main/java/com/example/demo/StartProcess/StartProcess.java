@@ -36,7 +36,7 @@ public class StartProcess {
     @Autowired
     private UserRepository userRepository;
 
-    public String startApply(String userName, String checkName, String reason){
+    public String startApply(String userName, String checkName, String reason,String suggest){
         String url="http://192.168.70.47:8888/grcv5/api/flow/v1/process-drive/process-instance/start_dispatch";
         Map<String,String> map = new HashMap<String,String>();
         String userHdId = userRepository.findHdIdByUserName(userName);
@@ -45,7 +45,7 @@ public class StartProcess {
         Map caller = startProcessParameter.getStartCaller(userHdId,userName);
         List<Map> inputs = startProcessParameter.getStartInputs(userName, reason);
         List<Map> particpantInfos = startProcessParameter.getStartParticipantInfos(checkHdId,checkName,"qjt.2");
-
+        List<Map> opinions  = startProcessParameter.getStartOpinions(suggest);
 
         FlowProcess flowProcess = new FlowProcess();
         flowProcess.setActionId("qjt.1");
@@ -54,6 +54,7 @@ public class StartProcess {
         flowProcess.setFormId("model:_102411");
         flowProcess.setInputs(inputs);
         flowProcess.setParticipantInfos(particpantInfos);
+        flowProcess.setOpinions(opinions);
 
         String json = JSONObject.toJSON(flowProcess).toString();
 

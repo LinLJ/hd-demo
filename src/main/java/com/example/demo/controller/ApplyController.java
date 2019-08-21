@@ -22,10 +22,11 @@ public class ApplyController {
     public String clickApply(Model model,
                              @RequestParam(value="userName",defaultValue="c1") String userName,
                              @RequestParam(value="reason",defaultValue="请假default") String reason,
-                             @RequestParam(value="checkName",defaultValue="b1") String checkName){
+                             @RequestParam(value="checkName",defaultValue="b1") String checkName,
+                             @RequestParam(value="suggest",defaultValue="同意") String suggest){
 
 
-        String checkResult = startProcess.startApply(userName,checkName,reason);
+        String checkResult = startProcess.startApply(userName,checkName,reason,suggest);
         System.out.println(checkResult);
 
         model.addAttribute("userName", userName);

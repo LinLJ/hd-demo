@@ -27,6 +27,29 @@ public class getApplyList {
         return result;
     }
 
+    public String handledList(String hdId){
+        String url="http://192.168.70.47:8888/grcv5/api/flow/v1/user-tasks/processed";
+        Map<String,String> map = new HashMap<String,String>();
+        String json = "{\"userAccount\": \""+hdId+"\"}";
+        String result ="";
+        try {
+            result = postJson.getPostJson(url,json);
+        }catch (Exception e){
+        }
+        return result;
+    }
+    public String completeList(String hdId){
+        String url="http://192.168.70.47:8888/grcv5/api/flow/v1/user-tasks/completed";
+        Map<String,String> map = new HashMap<String,String>();
+        String json = "{\"userAccount\": \""+hdId+"\"}";
+        String result ="";
+        try {
+            result = postJson.getPostJson(url,json);
+        }catch (Exception e){
+        }
+        return result;
+    }
+
     public String checkList(String hdId){
         String url="http://192.168.70.47:8888/grcv5/api/flow/v1/user-tasks/todo";
         Map<String,String> map = new HashMap<String,String>();

@@ -67,8 +67,19 @@ public class HttpCallService {
         return result;
     }
 
+    public String getSuggest(String beanId,String formId){
+        String url="http://192.168.70.47:8888/grcv5/api/flow/v1/process-instance-query/all-opinion/"+formId+"/"+beanId;
+        Map<String,String> map = new HashMap<String,String>();
+        String result ="";
+        try {
+            result = postJson.doGet(url,null);
+        }catch (Exception e){
+        }
+        return result;
+    }
 
-    public String pushProcess(String userName, String checkName, int instId, int activeStepId,String stepId, String nextStepId){
+
+    public String pushProcess(String userName, String checkName, int instId, int activeStepId,String stepId, String nextStepId,String suggest){
         String url="http://192.168.70.47:8888/grcv5/api/flow/v1/process-drive/task/dispatch";
         Map<String,String> map = new HashMap<String,String>();
         String userHdId = userRepository.findHdIdByUserName(userName);
@@ -76,7 +87,7 @@ public class HttpCallService {
 
         Map caller = startProcessParameter.getStartCaller(userHdId,userName);
         List<Map> particpantInfos = startProcessParameter.getStartParticipantInfos(checkHdId,checkName,nextStepId);
-
+        List<Map> opinions = startProcessParameter.getStartOpinions(suggest);
 
         PushProcess pushProcess = new PushProcess();
         pushProcess.setActionId(stepId);
@@ -85,6 +96,7 @@ public class HttpCallService {
         pushProcess.setInstId(instId);
         pushProcess.setParticipantInfos(particpantInfos);
         pushProcess.setActiveStepId(activeStepId);
+        pushProcess.setOpinions(opinions);
 
         String json = JSONObject.toJSON(pushProcess).toString();
 

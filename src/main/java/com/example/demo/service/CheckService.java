@@ -6,6 +6,7 @@ import com.example.demo.domain.Flow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class CheckService {
         return reason;
     }
 
-    public String clickCheck(String checkName,String nextCheckName,int instId){
+    public String clickCheck(String checkName,String nextCheckName,int instId,String suggest){
         //根据instId获取activeStepId
 
         String result = httpCall.getActiveStepIdByInstId(instId);
@@ -69,9 +70,39 @@ public class CheckService {
         }catch (Exception x){
 
         }
-        String instIdArray = httpCall.pushProcess(checkName,nextCheckName,instId,activeStepId,stepId,nextStepId);
+        String instIdArray = httpCall.pushProcess(checkName,nextCheckName,instId,activeStepId,stepId,nextStepId,suggest);
 
         return instIdArray;
 
+    }
+
+    public List getSuggest(String beanId){
+       String result =  httpCall.getSuggest(beanId, "model%3A_102411");
+        List<Map> suggestList = new ArrayList();
+        try {
+            Map resultMap = JSON.parseObject(result);
+            List<Map> list = (List<Map>)resultMap.get("opinion");
+
+            for(Map map : list){
+                String suggest = map.get("content").toString();
+                String[] dates=suggest.split("<date>|</date>");
+                String date = dates[1];
+
+                String[] users=suggest.split("<user>|</user>");
+                String user = users[1];
+
+                String[] contents=suggest.split("<content>|</content>");
+                String content = contents[1];
+
+                Map suggestMap = new HashMap();
+                suggestMap.put("date",date);
+                suggestMap.put("user",user);
+                suggestMap.put("content",content);
+                suggestList.add(suggestMap);
+            }
+        }catch (Exception x){
+
+        }
+       return suggestList;
     }
 }

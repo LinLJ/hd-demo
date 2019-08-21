@@ -65,4 +65,17 @@ public class StartProcessParameter {
 
         return checkList;
     }
+
+    public List<Map> getStartOpinions(String suggest){
+
+        List<Map> checkList = new ArrayList<>();
+
+        Map destMap = new HashMap();
+        destMap.put("name", "opinion");
+        destMap.put("value", suggest);
+
+        checkList.add(destMap);
+
+        return checkList;
+    }
 }

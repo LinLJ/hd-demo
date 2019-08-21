@@ -50,7 +50,20 @@ public class ApplyListController {
             List<Flow> list = (List<Flow>)map.get("datas");
             model.addAttribute("applyList", list);
             return "aplyList/todoList";
+        }else if ("handled".equals(type)){
+            String str = getApplyList.handledList(hdId);
+            Map map = JSON.parseObject(str);
+            List<Flow> list = (List<Flow>)map.get("datas");
+            model.addAttribute("applyList", list);
+            return "aplyList/list";
+        }else if ("complete".equals(type)){
+            String str = getApplyList.completeList(hdId);
+            Map map = JSON.parseObject(str);
+            List<Flow> list = (List<Flow>)map.get("datas");
+            model.addAttribute("applyList", list);
+            return "aplyList/list";
         }
+
         return "aplyList/list";
     }
 

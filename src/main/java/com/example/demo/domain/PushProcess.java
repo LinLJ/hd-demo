@@ -20,8 +20,19 @@ public class PushProcess implements Serializable {
 
     private List<Map> participantInfos;
 
+    private List<Map> opinions;
+
+
     public String getActionId() {
         return actionId;
+    }
+
+    public List<Map> getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(List<Map> opinions) {
+        this.opinions = opinions;
     }
 
     public void setActionId(String actionId) {

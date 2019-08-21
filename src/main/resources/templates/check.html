@@ -30,13 +30,40 @@
 </div>
 <hr />
 <p>当前流程</p>
-<span th:text="${current.operator}"></span>
-<span th:text="${current.stepName}"></span>
-<span th:text="${current.status}"></span>
+<div th:if="${haveCurrentCheker}">
+    <span th:text="${current.operator}"></span>
+    <span th:text="${current.stepName}"></span>
+    <span th:text="${current.status}"></span>
+</div>
+<hr />
+<div>
+    <p>意见列表</p>
+    <span th:each="suggest : ${suggestList}">
+        <span>
+            <span>编号：</span>
+            <span th:text="${suggest.user}"></span>
+
+            <span>时间：</span>
+            <span th:text="${suggest.date}"></span>
+
+            <span>意见：</span>
+            <span th:text="${suggest.content}"></span>
+
+
+        </span>
+        <br />
+    </span>
+</div>
+
+
+
 <hr />
 <div th:if="${currentCheker}">
     <div th:if="${haveNextCheck}">
         <p>提交至：</p><input id="nextCheckName" type="text"/>
+    </div>
+    <div>
+        <p>意见：</p><input id="suggest" type="text"/>
     </div>
     <button  onclick="clickCheck()">审批</button>
 </div>

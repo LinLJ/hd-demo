@@ -21,6 +21,7 @@ public class CheckController {
     @RequestMapping("showApplication")
     public String showApplication(Model model,
                                   @RequestParam(value="instId",defaultValue="35") String instId,
+                                  @RequestParam(value="beanId",defaultValue="35") String beanId,
                                   @RequestParam(value="userName",defaultValue="c1") String userName){
         //审批并进入下一步
         List history = checkService.getHistToryStep(instId);
@@ -32,6 +33,11 @@ public class CheckController {
         model.addAttribute("current", currentStep);
         model.addAttribute("instId", instId);
         model.addAttribute("userName", userName);
+        if(currentStep.size()==0){
+            model.addAttribute("haveCurrentCheker", false);
+        }else {
+            model.addAttribute("haveCurrentCheker", true);
+        }
 
         if(userName.equals(currentStep.get("operator"))){
             model.addAttribute("currentCheker", true);
@@ -44,8 +50,8 @@ public class CheckController {
             model.addAttribute("haveNextCheck", true);
         }
 
-
-
+        List suggestList = checkService.getSuggest(beanId);
+        model.addAttribute("suggestList", suggestList);
         return "check";
     }
 
@@ -72,9 +78,10 @@ public class CheckController {
     public String clickApply(Model model,
                              @RequestParam(value="checkName",defaultValue="b1") String checkName,
                              @RequestParam(value="nextCheckName",defaultValue="a") String nextCheckName,
-                             @RequestParam(value="instId",defaultValue="40") int instId){
+                             @RequestParam(value="instId",defaultValue="40") int instId,
+                             @RequestParam(value="suggest",defaultValue="同意") String suggest){
 
-        String array = checkService.clickCheck(checkName,nextCheckName,instId);
+        String array = checkService.clickCheck(checkName,nextCheckName,instId,suggest);
         System.out.println(array);
 
         return "aplyList/index";
